@@ -1,0 +1,3 @@
+variable "BucketName" {
+    type = string
+}
