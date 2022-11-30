@@ -22,13 +22,55 @@ def VerSonEnable(bucket_name):
     versioning.enable()
 
     print(f'Wow, Your versioning is enabled for S3 Bucket: {versioning.status}')
-
+VerSonEnable(BucketName)
 
 #<<<lifecycle>>
 s3=boto3.resource('s3')
-Bucket_Lifecycle=s3.BucketLifecycle(BucketName)
+bucket_lifecycle_configuration=s3.BucketLifecycleConfiguration(BucketName)
+response=bucket_lifecycle_configuration.put(
+    # ChecksumAlgorithm='CRC32'|'CRC32C'|'SHA1'|'SHA256',
+    LifecycleConfiguration={
+        'Rules': [
+            {
+                'Expiration': {
+                    'Days': 15,
+                    'ExpiredObjectDeleteMarker': True
+                },
+                'ID': 'demorule',
+                'Filter': {
+                },
+                'Status': 'Enabled',
+                'Transitions': [
+                    {
+                        # 'Date': datetime(2015, 1, 1),
+
+                        'Days': 23,
+                        'StorageClass': 'GLACIER'
+
+                        # |'STANDARD_IA'|'ONEZONE_IA'|'INTELLIGENT_TIERING'|'DEEP_ARCHIVE'|'GLACIER_IR'
+                    },
+                ],
+                'NoncurrentVersionTransitions': [
+                    {
+                        'NoncurrentDays': 23,
+                        'StorageClass': 'STANDARD_IA',
+                        'NewerNoncurrentVersions': 23
+                    },
+                ],
+                'NoncurrentVersionExpiration': {
+                    'NoncurrentDays': 123,
+                    'NewerNoncurrentVersions': 123
+                },
+                'AbortIncompleteMultipartUpload': {
+                    'DaysAfterInitiation': 123
+                }
+            },
+        ]
+    },
+    ExpectedBucketOwner='demo'
+)
 
 
-VerSonEnable(BucketName)
+
 
 print("Amazon S3 bucket has been created")
