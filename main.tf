@@ -7,14 +7,34 @@ provider "aws" {
   profile = "demo"
 }
 
-resource "aws_s3_bucket" "b" {
+resource "aws_s3_bucket" "bucket" {
   bucket = local.bucketName
   versioning {
-    enabled=True
+    enabled=true
   }
-
-  tags = {
+  
+  acl = 'private'
+    tags = {
     Name        = "My bucket"
     Environment = "test"
+  }
+}
+resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
+  bucket=aws_s3_bucket.bucket.bucket
+  rule {
+    id = "DemoVersoning"
+
+    expiration {
+      days = 90
+    }
+    transition {
+      days          = 30
+      storage_class = "STANDARD_IA"
+    }
+
+    transition {
+      days          = 60
+      storage_class = "GLACIER"
+    }
   }
 }
