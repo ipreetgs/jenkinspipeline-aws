@@ -9,6 +9,9 @@ provider "aws" {
 
 resource "aws_s3_bucket" "b" {
   bucket = local.bucketName
+  versioning {
+    enabled=True
+  }
 
   tags = {
     Name        = "My bucket"
