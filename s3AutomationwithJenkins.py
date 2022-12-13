@@ -8,11 +8,23 @@ AWS_REGION = "us-east-1"
 session = boto3.session.Session()
 s3_client = session.client('s3')
 
+#<<<<<<<<<< check for buckets>>>>>>>>>>>>>>>>>
+s3 = boto3.resource('s3')
+AWS_buckets = [bucket.name for bucket in s3.buckets.all()]
+if BucketName in AWS_buckets:
+    print("Bucket already avaliable")
+
+else:
+    print("name not found: Creating one!!!!!!") 
+
+
 # <<<<<<<<<    code for bucket creation  >>>>>>>
 
 client = boto3.client('s3')
-
-response = client.create_bucket(Bucket=BucketName)
+try:
+    response = client.create_bucket(Bucket=BucketName)
+except Exception as E:
+    print(E)
 
 #<<<<<<<<vers>>>>>>
 resource_for_s3 = boto3.resource("s3", region_name=AWS_REGION)
@@ -69,7 +81,6 @@ response=bucket_lifecycle_configuration.put(
     },
     ExpectedBucketOwner='demo'
 )
-
 
 
 
