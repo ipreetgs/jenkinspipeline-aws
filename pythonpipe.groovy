@@ -5,9 +5,9 @@ pipeline{
     }
    parameters {
         string description: 'Enter the name of S3 bucket', name: 'Bucket_Name'
-        string description: 'Enter the EXp date', expday: 'Exp_Day'
-        string description: 'Enter the transfer date', transday: 'Trans_Day'
-        string description: 'Enter the name of S3 bucket', oth: 'Oth_day'
+        string description: 'Enter the EXp date', name: 'Exp_Day'
+        string description: 'Enter the transfer date', name: 'Trans_Day'
+        string description: 'Enter the name of S3 bucket', name: 'Oth_day'
     }
     stages {
         stage('Git checkout') {
