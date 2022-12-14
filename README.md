@@ -1,22 +1,5 @@
 "# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
-"# jenkinspipeline-aws" 
+
+velidate bucket names
+lifecycles pera- Jenkis perameters 
+
