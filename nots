@@ -1,2 +1,34 @@
 velidate bucket names
 lifecycles pera- Jenkis perameters 
+
+
+response = bucket_lifecycle.put(
+    LifecycleConfiguration={
+        'Rules': [
+            {
+                'Expiration': {
+                    'Days': 123,
+                    'ExpiredObjectDeleteMarker': True
+                },
+                'ID': 'dummyRule',
+                'Status': 'Enabled',
+                'Transition': {
+                    'Days': 23,
+                    'StorageClass': 'STANDARD_IA',
+                },
+                'NoncurrentVersionTransition': {
+                    'NoncurrentDays': 123,
+                    'StorageClass': 'GLACIER',
+                    'NewerNoncurrentVersions': 123
+                },
+                'NoncurrentVersionExpiration': {
+                    'NoncurrentDays': 123,
+                    'NewerNoncurrentVersions': 123
+                },
+                'AbortIncompleteMultipartUpload': {
+                    'DaysAfterInitiation': 123
+                }
+            },
+        ]
+    },
+)

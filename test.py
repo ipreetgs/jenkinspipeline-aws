@@ -1,18 +1,8 @@
-import sys
 import boto3
-BucketName = sys.argv[1]
-ExpDay = int(sys.argv[2])
-TransDay = int(sys.argv[3])
-oth = int(sys.argv[4])
-
-
-
-def LifeCycle_Mgmt(BucketName,ExpDay,TransDay,Oth):
-
+def LifeCycle_Mgmt(BucketName,TransDay,ExpDay,NonCurrVeTrans):
     s3=boto3.resource('s3')
     bucket_lifecycle_configuration=s3.BucketLifecycleConfiguration(BucketName)
     response=bucket_lifecycle_configuration.put(
-        # ChecksumAlgorithm='CRC32'|'CRC32C'|'SHA1'|'SHA256',
         LifecycleConfiguration={
             'Rules': [
                 {
@@ -21,24 +11,18 @@ def LifeCycle_Mgmt(BucketName,ExpDay,TransDay,Oth):
                         'ExpiredObjectDeleteMarker': True
                     },
                     'ID': 'demorule',
-                    'Filter': {
-                    },
                     'Status': 'Enabled',
                     'Transitions': [
                         {
-                            # 'Date': datetime(2015, 1, 1),
-
                             'Days': TransDay,
-                            'StorageClass': 'GLACIER'
-
-                            # |'STANDARD_IA'|'ONEZONE_IA'|'INTELLIGENT_TIERING'|'DEEP_ARCHIVE'|'GLACIER_IR'
+                            'StorageClass': 'STANDARD_IA',
                         },
                     ],
                     'NoncurrentVersionTransitions': [
                         {
-                            'NoncurrentDays': Oth,
-                            'StorageClass': 'STANDARD_IA',
-                            'NewerNoncurrentVersions': 23
+                            'NoncurrentDays': NonCurrVeTrans,
+                            'StorageClass': 'GLACIER',
+                            'NewerNoncurrentVersions': 2
                         },
                     ],
                     'NoncurrentVersionExpiration': {
@@ -50,8 +34,6 @@ def LifeCycle_Mgmt(BucketName,ExpDay,TransDay,Oth):
                     }
                 },
             ]
-        },
-        # ExpectedBucketOwner=''
+        }
     )
-
-LifeCycle_Mgmt(BucketName,ExpDay,TransDay,oth)
+LifeCycle_Mgmt("demotxchd1",15,20,30)
