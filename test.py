@@ -9,36 +9,17 @@ def LifeCycle_Mgmt(BucketName,TransDay,ExpDay,NonCurrVeTrans):
             'Rules': [
                 {
                     'Expiration': {
-                        'Date': datetime(2015, 1, 1),
                         'Days': ExpDay,
                         'ExpiredObjectDeleteMarker': True
                     },
                     'ID': 'demotxchdrule',
-                    'Prefix': 'string',
+                    'Prefix': '',
                     'Filter': {
-                        'Prefix': 'string',
-                        'Tag': {
-                            'Key': 'string',
-                            'Value': 'string'
-                        },
-                        'ObjectSizeGreaterThan': 123,
-                        'ObjectSizeLessThan': 123,
-                        'And': {
-                            'Prefix': 'string',
-                            'Tags': [
-                                {
-                                    'Key': 'string',
-                                    'Value': 'string'
-                                },
-                            ],
-                            'ObjectSizeGreaterThan': 123,
-                            'ObjectSizeLessThan': 123
-                        }
+                        
                     },
                     'Status': 'Enabled',
                     'Transitions': [
                         {
-                            'Date': datetime(2015, 1, 1),
                             'Days': TransDay,
                             'StorageClass': 'STANDARD_IA'
                         },
@@ -47,16 +28,11 @@ def LifeCycle_Mgmt(BucketName,TransDay,ExpDay,NonCurrVeTrans):
                         {
                             'NoncurrentDays': NonCurrVeTrans,
                             'StorageClass': 'GLACIER',
-                            'NewerNoncurrentVersions': 123
                         },
                     ],
                     'NoncurrentVersionExpiration': {
                         'NoncurrentDays': 123,
-                        'NewerNoncurrentVersions': 123
                     },
-                    'AbortIncompleteMultipartUpload': {
-                        'DaysAfterInitiation': 123
-                    }
                 },
             ]
         },

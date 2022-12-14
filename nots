@@ -2,6 +2,8 @@ velidate bucket names
 lifecycles pera- Jenkis perameters 
 
 
+
+
 response = bucket_lifecycle.put(
     LifecycleConfiguration={
         'Rules': [
