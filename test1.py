@@ -1,5 +1,5 @@
 import boto3
-def LifeCycle_Mgmt(BucketName,TransDays,NonCrV,ExpDays)
+def LifeCycle_Mgmt(BucketName,TransDays,NonCrV,ExpDays):
     client=boto3.client('s3')
     response = client.put_bucket_lifecycle_configuration(
         Bucket=BucketName,
