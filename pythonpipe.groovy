@@ -5,8 +5,8 @@ pipeline{
     }
    parameters {
         string description: 'Enter the name of S3 bucket', name: 'Bucket_Name'
-        string description: 'Enter the name of S3 bucket', expay: 'ExpDay'
-        string description: 'Enter the name of S3 bucket', transday: 'TransDay'
+        string description: 'Enter the EXp date', expay: 'ExpDay'
+        string description: 'Enter the transfer date', transday: 'TransDay'
         string description: 'Enter the name of S3 bucket', oth: 'oth'
     }
     stages {
