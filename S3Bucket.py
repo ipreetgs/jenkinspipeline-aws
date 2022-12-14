@@ -67,7 +67,7 @@ AWS_buckets = [bucket.name for bucket in s3.buckets.all()]
 if BucketName in AWS_buckets:
     print("Bucket already avaliable")
     VerSonEnable(BucketName)
-    LifeCycle_Mgmt(BucketName,ExpDay,TransDay,oth)
+    LifeCycle_Mgmt(BucketName,TransDays,NonCrV,ExpDays)
 
 
 else:
@@ -75,5 +75,3 @@ else:
     CreateBucket(BucketName)
     VerSonEnable(BucketName)
     LifeCycle_Mgmt(BucketName,TransDays,NonCrV,ExpDays)
-
-

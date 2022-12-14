@@ -1,6 +1,5 @@
 import boto3
-
-def LifeCycle_Mgmt(BucketName)
+def LifeCycle_Mgmt(BucketName,TransDays,NonCrV,ExpDays)
     client=boto3.client('s3')
     response = client.put_bucket_lifecycle_configuration(
         Bucket=BucketName,
@@ -15,18 +14,18 @@ def LifeCycle_Mgmt(BucketName)
                     'Status': 'Enabled',
                     'Transitions': [
                         {
-                            'Days': 90,
+                            'Days': TransDays,
                             'StorageClass': 'STANDARD_IA'
                         },
                     ],
                     'NoncurrentVersionTransitions': [
                         {
-                            'NoncurrentDays': 90,
+                            'NoncurrentDays': NonCrV,
                             'StorageClass': 'GLACIER'
                         },
                     ],
                     'NoncurrentVersionExpiration': {
-                        'NoncurrentDays': 91
+                        'NoncurrentDays': ExpDays
                     }
                 },
             ]
