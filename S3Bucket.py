@@ -4,7 +4,7 @@ import sys
 BucketName = sys.argv[1]
 ExpDay =int(sys.argv[2])
 TransDay = int(sys.argv[3])
-oth = int(sys.argv[4]
+oth = int(sys.argv[4])
 AWS_REGION = "us-east-1"
 
 #<<<< functions>>>>
