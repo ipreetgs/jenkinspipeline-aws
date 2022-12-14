@@ -5,6 +5,9 @@ pipeline{
     }
    parameters {
         string description: 'Enter the name of S3 bucket', name: 'Bucket_Name'
+        string description: 'Enter the name of S3 bucket', expay: 'ExpDay'
+        string description: 'Enter the name of S3 bucket', transday: 'TransDay'
+        string description: 'Enter the name of S3 bucket', oth: 'oth'
     }
     stages {
         stage('Git checkout') {
@@ -14,7 +17,7 @@ pipeline{
         }
         stage('Bucket Creation ') {
             steps{
-                sh 'python3 s3AutomationwithJenkins.py'
+                sh 'python3 s3AutomationwithJenkins.py name expday transday oth'
             }
         }
     }

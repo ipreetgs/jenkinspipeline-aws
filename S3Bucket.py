@@ -73,7 +73,7 @@ def LifeCycle_Mgmt(BucketName,ExpDay,TransDay,Oth):
                 },
             ]
         },
-        ExpectedBucketOwner='demo'
+        # ExpectedBucketOwner='demo'
     )
 
 # <<<<<< code >>>>
