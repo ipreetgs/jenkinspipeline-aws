@@ -17,7 +17,8 @@ pipeline{
         }
         stage('Bucket Creation ') {
             steps{
-                sh 'python3 S3Bucket.py name expday transday oth'
+                // sh 'python3 S3Bucket.py name expday transday oth'
+                sh 'echo'
             }
         }
     }
