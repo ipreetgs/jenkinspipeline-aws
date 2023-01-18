@@ -1,22 +1,40 @@
-import pexpect
-
-username = 'demo'
-password = '123'
-su="su"
-# create a new pexpect spawn object
-child = pexpect.spawn(f'{su} {username}')
-child.sendline(f'{su} {username}')
-# specify the expected password prompt
-child.expect('Password:')
-child.sendline("123")
-
-# wait for the process to complete
-child.expect('$')
-
-
-child.sendline('whoami')
-# print(child.sendline('whoami'))
-child.expect('$')
-print(child.before)
-
-print(child.after)
+import boto3
+from datetime import datetime
+def LifeCycle_Mgmt(BucketName,TransDay,ExpDay,NonCurrVeTrans):
+    s3=boto3.resource('s3')
+    bucket_lifecycle_configuration=s3.BucketLifecycleConfiguration(BucketName)
+    response = bucket_lifecycle_configuration.put(
+        ChecksumAlgorithm='CRC32',
+        LifecycleConfiguration={
+            'Rules': [
+                {
+                    'Expiration': {
+                        'Days': ExpDay,
+                        'ExpiredObjectDeleteMarker': True
+                    },
+                    'ID': 'demotxchdrule',
+                    'Prefix': '',
+                    'Filter': {
+                        
+                    },
+                    'Status': 'Enabled',
+                    'Transitions': [
+                        {
+                            'Days': TransDay,
+                            'StorageClass': 'STANDARD_IA'
+                        },
+                    ],
+                    'NoncurrentVersionTransitions': [
+                        {
+                            'NoncurrentDays': NonCurrVeTrans,
+                            'StorageClass': 'GLACIER',
+                        },
+                    ],
+                    'NoncurrentVersionExpiration': {
+                        'NoncurrentDays': 123,
+                    },
+                },
+            ]
+        },
+    )
+LifeCycle_Mgmt("demotxchd1",15,20,30)

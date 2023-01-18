@@ -1,4 +1,4 @@
 git add .
-git commit -m "modify py file"
+git commit -m "modify yml file"
 
-git push -u origin main
+git push

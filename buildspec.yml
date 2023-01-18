@@ -1,0 +1,35 @@
+version: 0.2
+
+env:
+  variables:
+    ENVIRONMENT: dev
+    BucketName: demotxchd
+    TransDays: 30
+    NonCrV: 35
+    ExpDays: 49
+    TF_IN_AUTOMATION: 1
+    TERRAFORM_VERSION: 1.1.6
+    TERRATEST_VERSION: v0.40.4
+    BASE_PATH: modules
+    #TEST_ACCOUNT_ASSUMED_ROLE: "" In case of cross deployment this is the role in the target account.
+
+phases:
+  install:
+    runtime-versions:
+      # golang: 1.16
+      python: 3.9
+    commands:
+      - echo Starting Verifying Install...
+      - pip3 install boto3
+      # - ./${BASE_PATH}/install.sh
+  pre_build:
+    commands:
+      - echo Starting pre-build...
+      
+      # - ./${BASE_PATH}/prebuild.sh
+  build:
+    commands:
+      - python3 S3Bucket.py ${BucketName} ${TransDays} ${NonCrV} ${ExpDays}
+  post_build:
+    commands:
+      - echo Test Performed completed on `date`
