@@ -25,11 +25,18 @@ class AwsServices:
             print(f"S3 bucket '{self.bucket_name}' created successfully.")
         except Exception as e:
             print(f"Error creating bucket: {e}")
+
+
+
+
     def VerSonEnable(bucket_name):
         resource_for_s3 = boto3.resource("s3", region_name=AWS_REGION)
         versioning = resource_for_s3.BucketVersioning(bucket_name)
         versioning.enable()
         print(f'versioning is enabled for S3 Bucket: {versioning.status}')
+
+
+
 
     def LifeCycle_Mgmt(BucketName,TransDays,NonCrV,ExpDays):
         client=boto3.client('s3')
@@ -64,6 +71,8 @@ class AwsServices:
             }
         )
 
+
+
     def create_instance(self, instance_type, image_id, key_name, security_group_ids, subnet_id):
         self.instance_type = instance_type
         self.image_id = image_id
@@ -86,4 +95,16 @@ class AwsServices:
 
 
 
-    
+    def create_Budget(self,BudgetName):
+        self.bucket_name = bucket_name
+        try:
+            self.s3.create_bucket(Bucket=self.bucket_name)
+            print(f"S3 bucket '{self.bucket_name}' created successfully.")
+        except Exception as e:
+            print(f"Error creating bucket: {e}")
+
+
+
+
+
+
