@@ -1,2 +1,5 @@
 velidate bucket names
 lifecycles pera- Jenkis perameters 
+
+
+// sh 'docker build --build-arg MY_VARIABLE=$Serv_Name -t awsserv .'

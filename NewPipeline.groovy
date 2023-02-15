@@ -4,7 +4,10 @@ pipeline{
         git 'Default'
     }
    parameters {
-        string description: 'Enter the name of Services', name: 'Serv_Name'
+        choice(name: 'Services', choices: ['EC2', 'S3','Budget'], description: 'Select Services')
+        string(name: 'name', defaultValue: 'John Doe', description: 'Enter name')
+        string(name: 'id', defaultValue: '30', description: 'Enter ')
+        
     }
     stages {
         stage('Git checkout') {
@@ -12,9 +15,21 @@ pipeline{
                 git branch: 'main', credentialsId: 'Github_tx_Creds', url: 'https://github.com/igurpreetsinghi/jenkinspipeline-aws.git'
             }
         }
+        stage(' User') {
+            steps {
+                
+                echo "Hello, ${params.name}!"
+            }
+        }
+        stage(' Check') {
+            steps {
+                echo "Hello, ${params.name}!"
+            }
+        }
         stage('Docker Setup ') {
             steps{
-                sh 'docker build --build-arg MY_VARIABLE=$Serv_Name -t awsserv .'
+                
+                echo "done"
             }
         }
     }
