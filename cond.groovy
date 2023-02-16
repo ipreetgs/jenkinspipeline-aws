@@ -7,27 +7,33 @@ pipeline{
         choice(name: 'Services', choices: ['EC2', 'S3','Budget'], description: 'Select Services') 
     }
     stages {
-        stage('Git checkout') {
-           steps{
-                git branch: 'main', credentialsId: 'Github_tx_Creds', url: 'https://github.com/igurpreetsinghi/jenkinspipeline-aws.git'
-            }
-        }
         stage(' Checkin') {
             steps{
                 script{
                     if (params.Services == 'S3') {
                         echo "you are not to proceed."
                         input(message: 'Please INPUT BUCKET NAME :', parameters: [string(name: 'Bname', defaultValue: 'John Doe', description: 'Enter Bucket name')])
-                    } else if (params.Services == 'EC2') {
+                    }else if (params.Services == 'EC2') {
                         echo "Wait for input."
                         input(message: 'Please INPUT ec2 specification :', parameters: [string(name: 'ECname', defaultValue: 'linux iam-122 txchd.pem', description: 'Enter specification')])
-                    } else if (params.Services == 'Budget') {
+                    }else if (params.Services == 'Budget') {
                         echo "you are not to proceed."
                         input(message: 'Please INPUT Budget NAME :', parameters: [string(name: 'Budname', defaultValue: 'Demobudget', description: 'Enter budget name')])
                     } else {
                         echo "Error"
                     }
                 }
+            }
+        }
+        stage(' User') {
+            steps {
+                
+                echo "Hello, ${params.Bname}!"
+            }
+        }
+        stage(' Check') {
+            steps {
+                echo "Hello, ${params.Bname}!"
             }
         }
         stage('Docker Setup ') {
