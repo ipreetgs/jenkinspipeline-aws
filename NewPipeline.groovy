@@ -30,11 +30,5 @@ pipeline{
                 }
             }
         }
-        stage('Docker Setup ') {
-            steps{
-                
-                echo "done"
-            }
-        }
     }
 }
