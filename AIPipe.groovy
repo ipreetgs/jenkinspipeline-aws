@@ -11,7 +11,6 @@ pipeline{
         }
         stage('RUN'){
             steps{
-                
                 echo "Hello"
             }
         }
