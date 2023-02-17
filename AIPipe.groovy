@@ -11,7 +11,8 @@ pipeline{
         }
         stage('RUN'){
             steps{
-                echo "Hello"
+                sh ' cd ~'
+                sh 'python AIMV.py'
             }
         }
     }
