@@ -14,3 +14,5 @@ pipeline{
                 'sh python3 AIMV.py'
             }
         }
+    }
+}
